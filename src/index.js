@@ -27,7 +27,6 @@ function onInput(e) {
 
   fetchCountries(countryName)
     .then(data => {
-      console.log(data);
       if (data.length > 10) {
         listCountry.innerHTML = '';
         return Notify.info(
