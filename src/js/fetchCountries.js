@@ -1,7 +1,4 @@
 export { fetchCountries };
-// `/name/${countryName}`;
-
-// const url1 = `https://restcountries.com/v3.1/name/${countryName}?fields=name,capital,population,languages,flags`;
 
 function fetchCountries(countryName) {
   const BASEURL = 'https://restcountries.com/v3.1';
@@ -9,7 +6,6 @@ function fetchCountries(countryName) {
   return fetch(
     `${BASEURL}${ENDPOINT}?fields=name,capital,population,languages,flags`
   ).then(response => {
-    console.log(response);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
