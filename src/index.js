@@ -9,17 +9,14 @@ const DEBOUNCE_DELAY = 300;
 
 const searchCountry = document.querySelector('#search-box');
 const listCountry = document.querySelector('.country-list');
-listCountry.style.listStyle = 'none';
-listCountry.style.margin = '0px';
-listCountry.style.padding = '10px';
-
 const infoCountry = document.querySelector('.country-info');
 
 const debounceOnInput = debounce(onInput, DEBOUNCE_DELAY);
 
 searchCountry.addEventListener('input', debounceOnInput);
 
-let countryName = '';
+let countryName;
+
 function onInput(e) {
   e.preventDefault();
   const contry = e.target;
@@ -42,8 +39,11 @@ function onInput(e) {
       }
     })
     .catch(err => {
-      Notify.failure('Oops, there is no country with that name');
-      listCountry.innerHTML = '';
-      infoCountry.innerHTML = '';
+      if (err.message === '404') {
+        Notify.failure('Oops, there is no country with that name');
+        listCountry.innerHTML = '';
+        infoCountry.innerHTML = '';
+        console.log(err);
+      }
     });
 }
